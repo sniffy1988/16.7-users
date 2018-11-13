@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-export default function Albums({ match }) {
+export default function Albums({ match, history }) {
   const [albumsdata, updateAlbums] = useState([]);
   function handleAlbumClick(album) {
-    console.log(album);
+    history.push(`/albums/${album.id}/photos`, album);
   }
   useEffect(async () => {
     try {
