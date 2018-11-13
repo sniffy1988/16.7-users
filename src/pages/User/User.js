@@ -14,12 +14,12 @@ const User = ({ match, history }) => {
     if (history.location.state) {
       handleUserUpdate(history.location.state);
     } else {
-      let { data, status } = await axios.get(
-        `https://jsonplaceholder.typicode.com/users/${match.params.id}`
-      );
-      if (status === 200) {
+      try {
+        let { data } = await axios.get(
+          `https://jsonplaceholder.typicode.com/users/${match.params.id}`
+        );
         handleUserUpdate(data);
-      }
+      } catch (error) {}
     }
   }, []);
 

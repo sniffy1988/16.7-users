@@ -15,10 +15,10 @@ export default function UsersList({ history }) {
   }
 
   useEffect(async () => {
-    const { data, status } = await axios.get('https://jsonplaceholder.typicode.com/users');
-    if (status === 200) {
+    try {
+      const { data } = await axios.get('https://jsonplaceholder.typicode.com/users');
       setUserChange(data);
-    }
+    } catch (error) {}
   }, []);
 
   return (

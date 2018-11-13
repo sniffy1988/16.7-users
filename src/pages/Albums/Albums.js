@@ -11,7 +11,7 @@ export default function Albums({ match, history }) {
         `https://jsonplaceholder.typicode.com/albums?userId=${match.params.id}`
       );
       updateAlbums(data);
-    } catch {}
+    } catch (errror) {}
   }, []);
   return (
     <>

@@ -10,7 +10,7 @@ export default function Posts({ match, history }) {
         `https://jsonplaceholder.typicode.com/posts?userId=${match.params.id}`
       );
       updatePosts(data);
-    } catch {}
+    } catch (error) {}
   }, []);
 
   function onBackClick() {
