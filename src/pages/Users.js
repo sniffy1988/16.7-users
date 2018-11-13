@@ -21,17 +21,18 @@ export default function UsersList({ history }) {
   }, []);
 
   return (
-    <ul>
+    <div className="ui relaxed divided list">
       {users.map(item => (
-        <li
+        <div
+          className="item"
           key={item.id}
           onClick={() => {
             onUserClick(item);
           }}
         >
           {item.name}
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }
