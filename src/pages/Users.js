@@ -1,50 +1,37 @@
-import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
 
+export default function UsersList({ history }) {
+  const [users, setUsers] = useState([]);
 
-// class UsersList extends Component {
-//
-//     async componentDidUpdate() {
-//         const {data: users} = await axios.get('https://jsonplaceholder.typicode.com/users');
-//         setUser(users);
-//     }
-//
-//     render() {
-//         const [users, setUser] = useState([]);
-//         return (
-//             <ul>
-//                 {users.map(item => (
-//                     <li key={item.id}>{item.name}</li>
-//                 ))}
-//             </ul>
-//         );
-//     }
-// }
+  function setUserChange(data) {
+    setUsers(data);
+  }
 
-export default function UsersList() {
-    const [users, setUsers] = useState([]);
+  function onUserClick(user) {
+    history.push(`/users/${user.id}`, user);
+  }
 
-    function setUserChange(data) {
-        setUsers(data);
+  useEffect(async () => {
+    const { data, status } = await axios.get('https://jsonplaceholder.typicode.com/users');
+    if (status === 200) {
+      setUserChange(data);
     }
+  }, []);
 
-    useEffect(async ()=> {
-        const {data, status} = await axios.get('https://jsonplaceholder.typicode.com/users');
-        if(status === 200) {
-            setUserChange(data);
-        }
-    }, []);
-
-
-    return (
-        <ul>
-            {users.map(item => (
-                <li key={item.id}>
-                    <Link to={`/users/${item.id}`}>{item.name}</Link>
-                </li>
-            ))}
-        </ul>
-    )
+  return (
+    <ul>
+      {users.map(item => (
+        <li
+          key={item.id}
+          onClick={() => {
+            onUserClick(item);
+          }}
+        >
+          {item.name}
+        </li>
+      ))}
+    </ul>
+  );
 }
