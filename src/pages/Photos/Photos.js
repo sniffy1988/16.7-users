@@ -12,18 +12,22 @@ export default function Photos({ location, match, history }) {
     } catch (error) {}
   });
   return (
-    <div>
+    <>
       <h2>{location.state.title}</h2>
-      <ul>
+      <div className="ui four column stackable grid container">
         {photosdata.map(photo => (
-          <li key={photo.id}>
-            <h4>{photo.title}</h4>
-            <p>
-              <img src={photo.thumbnailUrl} alt={photo.title} />
-            </p>
-          </li>
+          <div key={photo.id} className="column">
+            <div className="ui card">
+              <div className="image">
+                <img src={photo.thumbnailUrl} alt={photo.title} />
+              </div>
+              <div className="content">
+                <div className="description">{photo.title}</div>
+              </div>
+            </div>
+          </div>
         ))}
-      </ul>
-    </div>
+      </div>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
+import './user.css';
 
 const User = ({ match, history }) => {
   const [user, userUpdate] = useState({});
@@ -23,21 +24,31 @@ const User = ({ match, history }) => {
   }, []);
 
   return (
-    <div>
-      {user.name ? (
+    <div className="ui two column stackable grid container">
+      <div className="left column">
+        {user.name ? (
+          <div>
+            <h3>{user.name}</h3>
+          </div>
+        ) : (
+          <div>Loading...</div>
+        )}
+      </div>
+      <div className="sidebar one column">
         <div>
-          <h3>{user.name}</h3>
-          <div>
-            <Link to={`/posts/${match.params.id}`}>{user.name} Posts</Link>
-          </div>
-          <div>
-            <Link to={`/albums/${match.params.id}`}>{user.name} Albums</Link>
-          </div>
+          <Link className="ui button" to={`/posts/${match.params.id}`}>
+            {user.name} Posts
+          </Link>
         </div>
-      ) : (
-        <div>Loading...</div>
-      )}
-      <Link to={'/users'}>Back to users list</Link>
+        <div>
+          <Link className="ui button" to={`/albums/${match.params.id}`}>
+            {user.name} Albums
+          </Link>
+        </div>
+        <Link className="ui button" to={'/users'}>
+          Back to users list
+        </Link>
+      </div>
     </div>
   );
 };

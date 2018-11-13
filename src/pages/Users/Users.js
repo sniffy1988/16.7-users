@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './user.css';
 
 import axios from 'axios';
 
@@ -21,7 +22,7 @@ export default function UsersList({ history }) {
   }, []);
 
   return (
-    <div className="ui relaxed divided list">
+    <div className="ui divided list users-list">
       {users.map(item => (
         <div
           className="item"
@@ -30,7 +31,24 @@ export default function UsersList({ history }) {
             onUserClick(item);
           }}
         >
-          {item.name}
+          <div className="wrapper">
+            <h4>
+              <i className="users icon" />
+              {item.name}
+            </h4>
+            <div className="content">
+              <i className="mail icon" />
+              {item.email}
+            </div>
+            <div className="content">
+              <i className="phone icon" />
+              {item.phone}
+            </div>
+            <div className="content">
+              <i className="linkify icon" />
+              {item.website}
+            </div>
+          </div>
         </div>
       ))}
     </div>

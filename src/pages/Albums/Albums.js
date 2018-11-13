@@ -14,17 +14,22 @@ export default function Albums({ match, history }) {
     } catch {}
   }, []);
   return (
-    <ul>
-      {albumsdata.map(album => (
-        <li
-          key={album.id}
-          onClick={() => {
-            handleAlbumClick(album);
-          }}
-        >
-          {album.title}
-        </li>
-      ))}
-    </ul>
+    <>
+      <div className="ui divided list users-list">
+        {albumsdata.map(album => (
+          <div
+            className="item"
+            key={album.id}
+            onClick={() => {
+              handleAlbumClick(album);
+            }}
+          >
+            <div className="wrapper">
+              <h4>{album.title}</h4>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
