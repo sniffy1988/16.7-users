@@ -1,0 +1,11 @@
+.users-list .item {
+  cursor: pointer;
+}
+
+.users-list .item .wrapper {
+  padding: 5px;
+}
+
+.users-list .item:hover {
+  background: #aaa;
+}
