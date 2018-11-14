@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function({ error }) {
-  return <div>{error}</div>;
+export default function Error({ error }) {
+  return <div className="ui red header">{error}</div>;
 }
