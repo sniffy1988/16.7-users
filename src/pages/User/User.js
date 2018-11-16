@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import Error from '../../components/error';
+import withError from '../../HOCs/withError';
 import axios from 'axios';
 import './user.css';
 
@@ -29,8 +29,7 @@ const User = ({ match, history }) => {
 
   return (
     <>
-      {errorData && <Error error={errorData} />}
-      {!errorData && (
+      {withError(
         <div className="ui two column stackable grid container">
           <div className="left column">
             {user.name ? (
@@ -56,7 +55,8 @@ const User = ({ match, history }) => {
               Back to users list
             </Link>
           </div>
-        </div>
+        </div>,
+        errorData
       )}
     </>
   );

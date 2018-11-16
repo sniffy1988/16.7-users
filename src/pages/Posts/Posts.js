@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Error from '../../components/error';
+import withError from '../../HOCs/withError';
 
 export default function Posts({ match, history }) {
   const [postsdata, updatePosts] = useState([]);
@@ -23,8 +23,7 @@ export default function Posts({ match, history }) {
 
   return (
     <>
-      {errorData && <Error error={errorData} />}
-      {!errorData && (
+      {withError(
         <div className="ui list divided">
           {postsdata.map(item => (
             <div key={item.id} className="item">
@@ -34,7 +33,8 @@ export default function Posts({ match, history }) {
               </div>
             </div>
           ))}
-        </div>
+        </div>,
+        errorData
       )}
       <button className="ui button" onClick={onBackClick}>
         Back to User

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Error from '../../components/error';
+import withError from '../../HOCs/withError';
 
 export default function Albums({ match, history }) {
   const [albumsdata, updateAlbums] = useState([]);
@@ -27,8 +27,7 @@ export default function Albums({ match, history }) {
 
   return (
     <>
-      {errorData && <Error error={errorData} />}
-      {!errorData && (
+      {withError(
         <div className="ui divided list users-list">
           {albumsdata.map(album => (
             <div
@@ -43,7 +42,8 @@ export default function Albums({ match, history }) {
               </div>
             </div>
           ))}
-        </div>
+        </div>,
+        errorData
       )}
       <button className="ui button" onClick={backToUsersHandler}>
         Back to Users

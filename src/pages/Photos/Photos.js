@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Error from '../../components/error';
+import withError from '../../HOCs/withError';
 
 export default function Photos({ location, match, history }) {
   const [photosdata, updatePhotos] = useState([]);
@@ -24,8 +24,7 @@ export default function Photos({ location, match, history }) {
   return (
     <>
       <h2>{location.state.title}</h2>
-      {errorData && <Error error={errorData} />}
-      {!errorData && (
+      {withError(
         <div className="ui four column stackable grid container">
           {photosdata.map(photo => (
             <div key={photo.id} className="column">
@@ -39,7 +38,8 @@ export default function Photos({ location, match, history }) {
               </div>
             </div>
           ))}
-        </div>
+        </div>,
+        errorData
       )}
       <button className="ui button" onClick={onBackToAlbums}>
         Back to Albums

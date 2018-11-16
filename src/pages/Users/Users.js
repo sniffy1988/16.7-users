@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './user.css';
-import Error from '../../components/error';
+import withError from '../../HOCs/withError';
 
 import axios from 'axios';
 
 export default function UsersList({ history }) {
-  const [users, setUsers] = useState([]);
   const [errordata, setError] = useState('');
+  const [users, setUsers] = useState([]);
 
   function setUserChange(data) {
     setUsers(data);
@@ -27,8 +27,7 @@ export default function UsersList({ history }) {
 
   return (
     <>
-      {errordata && <Error error={errordata} />}
-      {!errordata && (
+      {withError(
         <div className="ui divided list users-list">
           {users.map(item => (
             <div
@@ -58,7 +57,8 @@ export default function UsersList({ history }) {
               </div>
             </div>
           ))}
-        </div>
+        </div>,
+        errordata
       )}
     </>
   );
